@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+	<class name="uy.edu.um.db_course.hibernate_orm_tutorial.Event" table="EVENTS">
+		<id name="id" column="EVENT_ID">
+			<generator class="native"/>
+		</id>
+		<property name="text" column="EVENT_TEXT" length="20"/>	
+		<property name="date" column="EVENT_DATE"/>	
+		<property name="enabled" column="EVENT_ENABLED"/>
+	</class>
+</hibernate-mapping>
