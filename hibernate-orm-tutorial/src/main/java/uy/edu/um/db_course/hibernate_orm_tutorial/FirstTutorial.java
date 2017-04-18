@@ -9,18 +9,27 @@ import org.hibernate.query.Query;
 
 public class FirstTutorial {
 
-	public static void main(String[] args) {
-		Configuration cfg = new Configuration().addResource("/Event.hbm.xml")
+	protected Configuration createBaseConfiguration() {
+		return new Configuration()
 				.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect")
 				.setProperty("hibernate.connection.driver_class", "com.mysql.jdbc.Driver")
 				.setProperty("hibernate.connection.url", "jdbc:mysql://localhost/firsttutorial")
 				.setProperty("hibernate.connection.username", "root")
-				.setProperty("hibernate.connection.password", "geocom").setProperty("hibernate.hbm2ddl.auto", "update");
+				.setProperty("hibernate.connection.password", "geocom")
+				.setProperty("hibernate.hbm2ddl.auto", "update")
+				.setProperty("hibernate.show_sql", "true");
+	}
+	
+	public void init() {
+		Configuration cfg = createBaseConfiguration().addResource("/Event.hbm.xml")
+				.addResource("/Person.hbm.xml");
 
 		SessionFactory sessions = cfg.buildSessionFactory();
 
 		Session session = sessions.openSession();
-
+		
+		session.save(new Person(new Date(), new Name('J', "Javier", "Pereira")));
+		
 		session.save(new Event("Primer evento!!!"));
 
 		Event event4 = session.load(Event.class, 4L );
@@ -41,6 +50,10 @@ public class FirstTutorial {
 		
 		session.close();
 		
+	}
+	
+	public static void main(String[] args) {
+		new FirstTutorial().init();
 		System.exit(0);
 	}
 }
