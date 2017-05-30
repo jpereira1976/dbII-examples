@@ -1,0 +1,33 @@
+  
+apply plugin: 'java'
+ 
+apply plugin: 'eclipse'
+  
+group = 'uy.edu.um.db_course'
+ 
+jar {
+    baseName = 'mongodb-tutorial'
+    version =  '0.0.1-SNAPSHOT'
+} 
+ 
+repositories {
+  maven { url "https://mymavenrepo.com/repo/v4ErnhQf9MS8Wj6mVdrP"}  
+  mavenCentral()
+}
+ 
+compileJava {
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+}    
+ 
+ 
+dependencies {
+    testCompile 'junit:junit:4.12'
+    compile 'com.google.code.gson:gson:2.8.0'
+	compile 'org.mongodb:mongo-java-driver:3.4.2' 
+}
+ 
+task "create-dirs" << {
+   sourceSets*.java.srcDirs*.each { it.mkdirs() }
+   sourceSets*.resources.srcDirs*.each { it.mkdirs() }
+}
