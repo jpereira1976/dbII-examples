@@ -27,7 +27,7 @@ dependencies {
 	compile 'org.mongodb:mongo-java-driver:3.4.2' 
 }
  
-task "create-dirs" << {
+task "	" << {
    sourceSets*.java.srcDirs*.each { it.mkdirs() }
    sourceSets*.resources.srcDirs*.each { it.mkdirs() }
 }
